@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Event Handling</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            color: #0056b3;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button, a.button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 5px 0;
+            transition: background-color 0.2s;
+        }
+        button:hover, a.button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .event-flow-box {
+            padding: 20px;
+            border: 2px solid #ccc;
+            margin: 10px;
+            text-align: center;
+        }
+        #grandparent { background-color: #ffdddd; border-color: #ff0000; }
+        #parent { background-color: #ddffdd; border-color: #00cc00; }
+        #child { background-color: #ddddff; border-color: #0000ff; }
+        #itemList li { cursor: pointer; }
+        #itemList li:hover { background-color: #e9ecef; }
+        #scrollBox {
+            height: 100px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript Event Handling Examples</h1>
+    <p>Open your browser's developer console (F12 or Ctrl/Cmd+Shift+I) to see the log messages.</p>
+
+    <div class="container">
+        <h2>1. The Basics: Attaching Event Handlers</h2>
+        <button onclick="alert('Inline handler fired. Avoid this method!');">Click Me (Inline ❌)</button>
+        <button id="propertyBtn">Click Me (Property ⚠️)</button>
+        <button id="listenerBtn">Click Me (Listener ✅)</button>
+    </div>
+
+    <div class="container">
+        <h2>2. The `event` Object & `preventDefault()`</h2>
+        <a id="myLink" class="button" href="https://www.google.com" target="_blank">Go to Google</a>
+        <p>Clicking the link above will be prevented by `event.preventDefault()`.</p>
+    </div>
+
+    <div class="container">
+        <h2>3. Event Flow: Bubbling & Capturing</h2>
+        <p>Click the blue button. Notice the order of events in the console.</p>
+        <div id="grandparent" class="event-flow-box">Grandparent
+            <div id="parent" class="event-flow-box">Parent
+                <button id="child" class="event-flow-box">Child Button</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>4. Advanced: Event Delegation</h2>
+        <p>Instead of adding a listener to each `<li>`, we add one to the `<ul>`. Click an item.</p>
+        <ul id="itemList">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>5. Advanced: Removing & Controlling Listeners</h2>
+        <p><strong>`removeEventListener`</strong>: This button's listener will be removed after the first click.</p>
+        <button id="removeBtn">Click me only once</button>
+        <p><strong>`once` option</strong>: A modern, cleaner way to have a listener fire only once.</p>
+        <button id="onceBtn">Click me only once (modern)</button>
+    </div>
+
+    <div class="container">
+        <h2>6. Advanced: Custom Events</h2>
+        <p>We'll programmatically fire a custom event called 'user:login' after 2 seconds.</p>
+        <div id="userProfile">Awaiting login...</div>
+    </div>
+
+    <div class="container">
+        <h2>7. Advanced: Modern Options (`passive` & `AbortController`)</h2>
+        <p><strong>`passive` listener</strong>: Scroll inside the box below to see a non-blocking event fire.</p>
+        <div id="scrollBox">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <p><strong>`AbortController`</strong>: Click "Listen," then click "Abort" to remove the listener.</p>
+        <button id="listenBtn">Listen for clicks</button>
+        <button id="abortBtn">Abort Listener</button>
+    </div>
+
+    <script src="eventHandling.js" defer></script>
+</body>
+</html>
